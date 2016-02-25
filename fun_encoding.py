@@ -61,9 +61,44 @@ MY_MAP.append(MapEntry('(', e=')'))
 MY_MAP.append(MapEntry(')', e='_'))
 MY_MAP.append(MapEntry('_', e='+'))
 
+MY_MAP.append(MapEntry('Q', e='W'))
+MY_MAP.append(MapEntry('W', e='E'))
+MY_MAP.append(MapEntry('E', e='R'))
+MY_MAP.append(MapEntry('R', e='T'))
+MY_MAP.append(MapEntry('T', e='Y'))
+MY_MAP.append(MapEntry('Y', e='U'))
+MY_MAP.append(MapEntry('U', e='I'))
+MY_MAP.append(MapEntry('I', e='O'))
+MY_MAP.append(MapEntry('O', e='P'))
+MY_MAP.append(MapEntry('P', e='{'))
+MY_MAP.append(MapEntry('{', e='}'))
+
+MY_MAP.append(MapEntry('A', e='S'))
+MY_MAP.append(MapEntry('S', e='D'))
+MY_MAP.append(MapEntry('D', e='F'))
+MY_MAP.append(MapEntry('F', e='G'))
+MY_MAP.append(MapEntry('G', e='H'))
+MY_MAP.append(MapEntry('H', e='J'))
+MY_MAP.append(MapEntry('J', e='K'))
+MY_MAP.append(MapEntry('K', e='L'))
+MY_MAP.append(MapEntry('L', e=':'))
+MY_MAP.append(MapEntry(':', e='\"'))
+
+MY_MAP.append(MapEntry('Z', e='X'))
+MY_MAP.append(MapEntry('X', e='C'))
+MY_MAP.append(MapEntry('C', e='V'))
+MY_MAP.append(MapEntry('V', e='B'))
+MY_MAP.append(MapEntry('B', e='N'))
+MY_MAP.append(MapEntry('N', e='M'))
+MY_MAP.append(MapEntry('M', e='<'))
+MY_MAP.append(MapEntry('<', e='>'))
+MY_MAP.append(MapEntry('>', e='?'))
+
 
 SKIP_CHARS = [' ']
 SKIP_ENCODE_CHARS = ['\'', '/', ']', '?', '"', '}']
+
+SKIP_DECODE_SEQUENCE = [', ', '. ']
 
 
 def encode_char(ch):
@@ -74,7 +109,7 @@ def encode_char(ch):
     for entry in MY_MAP:
         if ch == entry.m:
             return entry.e
-    return 'FUCK'
+    return 'FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF'
 
 
 def decode_char(ch):
@@ -83,19 +118,29 @@ def decode_char(ch):
     for entry in MY_MAP:
         if ch == entry.e:
             return entry.m
-    return 'FUCK'
+    return 'FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF'
 
 
-def decode(cipher):
-    return ''.join([decode_char(ch) for ch in cipher])
+def decode(encoded):
+    lst = []
+    for i in xrange(len(encoded)):
+        ch = encoded[i]
+        temp = ''.join(encoded[i:i+2])
+        print temp
+        if ''.join(encoded[i:i+2]) in SKIP_DECODE_SEQUENCE:
+            lst.append(ch)
+        else:
+            lst.append(decode_char(ch))
+    return ''.join(lst)
 
 
-def encode(mesasge):
-    return ''.join([encode_char(ch) for ch in mesasge])
+def encode(plain):
+    return ''.join([encode_char(ch) for ch in plain])
 
 
 # print decode('og upi vtsvl yjod. o esmy yp [;su eoyj upi/')
 
+print decode('O jsbr s;esud yjpihjy O esd s [rtdpm, rbrm ejrm d,s;;. Pg  s vrtysom drc, pg s vrtysom djs[r smf bstopid vp;pitd, gtp, s [;svr pt yep, smf pg ,u votvi,dysmvrd. Niy s;esud, snpbr s;;, sd s [rtdpm. ')
 
 
 
