@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+
+import argparse
 from collections import namedtuple
 
 MapEntry = namedtuple('MapEntry', ['m', 'e'])
@@ -125,8 +128,6 @@ def decode(encoded):
     lst = []
     for i in xrange(len(encoded)):
         ch = encoded[i]
-        temp = ''.join(encoded[i:i+2])
-        print temp
         if ''.join(encoded[i:i+2]) in SKIP_DECODE_SEQUENCE:
             lst.append(ch)
         else:
@@ -138,9 +139,27 @@ def encode(plain):
     return ''.join([encode_char(ch) for ch in plain])
 
 
-# print decode('og upi vtsvl yjod. o esmy yp [;su eoyj upi/')
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-e", "--encode", type=str, nargs='+',
+                        help="Encode the given string.")
+    parser.add_argument("-d", "--decode", type=str, nargs='+',
+                        help="Decode the given string.")
 
-print decode('O jsbr s;esud yjpihjy O esd s [rtdpm, rbrm ejrm d,s;;. Pg  s vrtysom drc, pg s vrtysom djs[r smf bstopid vp;pitd, gtp, s [;svr pt yep, smf pg ,u votvi,dysmvrd. Niy s;esud, snpbr s;;, sd s [rtdpm. ')
+    args = parser.parse_args()
+
+    if args.encode:
+        for orig in args.encode:
+            print("--------------")
+            print("Original:" + orig)
+            print("Encoded :" + encode(orig))
+
+    if args.decode:
+        for orig in args.decode:
+            print("--------------")
+            print("Original:" + orig)
+            print("Decoded :" + decode(orig))
 
 
-
+if __name__ == '__main__':
+    main()
