@@ -141,10 +141,10 @@ def encode(plain):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-e", "--encode", type=str, nargs='+',
-                        help="Encode the given string.")
-    parser.add_argument("-d", "--decode", type=str, nargs='+',
-                        help="Decode the given string.")
+    parser.add_argument("-e", "--encode", type=str, nargs='+', metavar='STR',
+                        help="Encode the given string STR.")
+    parser.add_argument("-d", "--decode", type=str, nargs='+', metavar='STR',
+                        help="Decode the given string STR.")
 
     args = parser.parse_args()
 
