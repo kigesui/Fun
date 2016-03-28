@@ -3,6 +3,15 @@
 import argparse
 from collections import namedtuple
 
+
+class FunException(Exception):
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return repr(self.value)
+
+
 MapEntry = namedtuple('MapEntry', ['m', 'e'])
 
 MY_MAP = []
@@ -121,7 +130,7 @@ def decode_char(ch):
     for entry in MY_MAP:
         if ch == entry.e:
             return entry.m
-    return 'FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF'
+    raise FunException("Unable to decode.")
 
 
 def decode(encoded):
@@ -147,6 +156,10 @@ def main():
                         help="Decode the given string STR.")
 
     args = parser.parse_args()
+
+    if not (args.encode or args.decode):
+        parser.print_usage()
+        return
 
     if args.encode:
         for orig in args.encode:
