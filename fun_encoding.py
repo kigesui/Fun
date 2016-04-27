@@ -16,101 +16,29 @@ MapEntry = namedtuple('MapEntry', ['m', 'e'])
 
 MY_MAP = []
 
-MY_MAP.append(MapEntry('1', e='2'))
-MY_MAP.append(MapEntry('2', e='3'))
-MY_MAP.append(MapEntry('3', e='4'))
-MY_MAP.append(MapEntry('4', e='5'))
-MY_MAP.append(MapEntry('5', e='6'))
-MY_MAP.append(MapEntry('6', e='7'))
-MY_MAP.append(MapEntry('7', e='8'))
-MY_MAP.append(MapEntry('8', e='9'))
-MY_MAP.append(MapEntry('9', e='0'))
-MY_MAP.append(MapEntry('0', e='-'))
-MY_MAP.append(MapEntry('-', e='='))
+KEYBOARD = [
+    ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '='       ],
+    [      'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\'],
+    [       'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\''         ],
+    [        'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/'              ],
 
-MY_MAP.append(MapEntry('q', e='w'))
-MY_MAP.append(MapEntry('w', e='e'))
-MY_MAP.append(MapEntry('e', e='r'))
-MY_MAP.append(MapEntry('r', e='t'))
-MY_MAP.append(MapEntry('t', e='y'))
-MY_MAP.append(MapEntry('y', e='u'))
-MY_MAP.append(MapEntry('u', e='i'))
-MY_MAP.append(MapEntry('i', e='o'))
-MY_MAP.append(MapEntry('o', e='p'))
-MY_MAP.append(MapEntry('p', e='['))
-MY_MAP.append(MapEntry('[', e=']'))
+    ['~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+'       ],
+    [      'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '{', '}', '|' ],
+    [       'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ':', '"'          ],
+    [        'Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?'              ]
+]
 
-MY_MAP.append(MapEntry('a', e='s'))
-MY_MAP.append(MapEntry('s', e='d'))
-MY_MAP.append(MapEntry('d', e='f'))
-MY_MAP.append(MapEntry('f', e='g'))
-MY_MAP.append(MapEntry('g', e='h'))
-MY_MAP.append(MapEntry('h', e='j'))
-MY_MAP.append(MapEntry('j', e='k'))
-MY_MAP.append(MapEntry('k', e='l'))
-MY_MAP.append(MapEntry('l', e=';'))
-MY_MAP.append(MapEntry(';', e='\''))
-
-MY_MAP.append(MapEntry('z', e='x'))
-MY_MAP.append(MapEntry('x', e='c'))
-MY_MAP.append(MapEntry('c', e='v'))
-MY_MAP.append(MapEntry('v', e='b'))
-MY_MAP.append(MapEntry('b', e='n'))
-MY_MAP.append(MapEntry('n', e='m'))
-MY_MAP.append(MapEntry('m', e=','))
-MY_MAP.append(MapEntry(',', e='.'))
-MY_MAP.append(MapEntry('.', e='/'))
-
-MY_MAP.append(MapEntry('!', e='@'))
-MY_MAP.append(MapEntry('@', e='#'))
-MY_MAP.append(MapEntry('#', e='$'))
-MY_MAP.append(MapEntry('$', e='%'))
-MY_MAP.append(MapEntry('%', e='^'))
-MY_MAP.append(MapEntry('^', e='&'))
-MY_MAP.append(MapEntry('&', e='*'))
-MY_MAP.append(MapEntry('*', e='('))
-MY_MAP.append(MapEntry('(', e=')'))
-MY_MAP.append(MapEntry(')', e='_'))
-MY_MAP.append(MapEntry('_', e='+'))
-
-MY_MAP.append(MapEntry('Q', e='W'))
-MY_MAP.append(MapEntry('W', e='E'))
-MY_MAP.append(MapEntry('E', e='R'))
-MY_MAP.append(MapEntry('R', e='T'))
-MY_MAP.append(MapEntry('T', e='Y'))
-MY_MAP.append(MapEntry('Y', e='U'))
-MY_MAP.append(MapEntry('U', e='I'))
-MY_MAP.append(MapEntry('I', e='O'))
-MY_MAP.append(MapEntry('O', e='P'))
-MY_MAP.append(MapEntry('P', e='{'))
-MY_MAP.append(MapEntry('{', e='}'))
-
-MY_MAP.append(MapEntry('A', e='S'))
-MY_MAP.append(MapEntry('S', e='D'))
-MY_MAP.append(MapEntry('D', e='F'))
-MY_MAP.append(MapEntry('F', e='G'))
-MY_MAP.append(MapEntry('G', e='H'))
-MY_MAP.append(MapEntry('H', e='J'))
-MY_MAP.append(MapEntry('J', e='K'))
-MY_MAP.append(MapEntry('K', e='L'))
-MY_MAP.append(MapEntry('L', e=':'))
-MY_MAP.append(MapEntry(':', e='\"'))
-
-MY_MAP.append(MapEntry('Z', e='X'))
-MY_MAP.append(MapEntry('X', e='C'))
-MY_MAP.append(MapEntry('C', e='V'))
-MY_MAP.append(MapEntry('V', e='B'))
-MY_MAP.append(MapEntry('B', e='N'))
-MY_MAP.append(MapEntry('N', e='M'))
-MY_MAP.append(MapEntry('M', e='<'))
-MY_MAP.append(MapEntry('<', e='>'))
-MY_MAP.append(MapEntry('>', e='?'))
-
+for row in KEYBOARD:
+    row_len = len(row)
+    for i in xrange(row_len):
+        orig_index = i
+        enco_index = (i+1) % row_len
+        MY_MAP.append(MapEntry(m=row[orig_index], e=row[enco_index]))
 
 SKIP_CHARS = [' ']
-SKIP_ENCODE_CHARS = ['\'', '/', ']', '?', '"', '}']
+SKIP_ENCODE_CHARS = []  # ['\'', '/', ']', '?', '"', '}']
 
-SKIP_DECODE_SEQUENCE = [', ', '. ']
+SKIP_DECODE_SEQUENCE = []  # [', ', '. ']
 
 
 def encode_char(ch):
